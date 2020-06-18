@@ -3,6 +3,7 @@
 namespace FocusriteNovation\DisableFrontend\Observer;
 
 use FocusriteNovation\DisableFrontend\Helper\Data as DisableFrontendHelper;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\App\ActionFlag;
 use Magento\Framework\App\Action\Action;
@@ -59,10 +60,10 @@ class DisableFrontend implements ObserverInterface {
      * Frontend.
      *
      * @author Abel Bolanos Martinez <abelbmartinez@gmail.com>
-     * @param \Magento\Framework\Event\ObserverInterface $observer
+     * @param \Magento\Framework\Event\Observer $observer
      * @return void
      */
-    public function execute(ObserverInterface $observer)
+    public function execute(Observer $observer)
     {
         // Shows a blank page if all else fails.
         $this->_actionFlag->set('', Action::FLAG_NO_DISPATCH, true);
