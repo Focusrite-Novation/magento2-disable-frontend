@@ -82,6 +82,7 @@ class DisableFrontend implements ObserverInterface {
             }
 
             // The URL is valid. If it isn't, then the config form can't save.
+            $controller = $observer->getControllerAction();
             $this->redirect->redirect($controller->getResponse(), $configValue['redirect_to']);
         }
     }
