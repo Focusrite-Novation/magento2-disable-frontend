@@ -44,7 +44,7 @@ class DisableFrontend implements ObserverInterface {
         ActionFlag $actionFlag,
         RedirectInterface $redirect,
         Data $helperBackend,
-        DisableFrontendHelper $disableFrontendHelper,
+        DisableFrontendHelper $disableFrontendHelper
     ) {
         $this->_actionFlag = $actionFlag;
         $this->redirect = $redirect;
