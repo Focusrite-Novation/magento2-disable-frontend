@@ -3,10 +3,13 @@
     <system>
         <section id="admin">
             <group id="disable_frontend" translate="label" type="text" sortOrder="9999" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Disable Frontend</label>
-                <field id="show_as_frontend" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Disable frontend</label>
+                <field id="show_frontend_as" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Show frontend as</label>
-                    <source_model>Abelbm\DisableFrontend\Model\Config\Source\Custom</source_model>
+                    <source_model>FocusriteNovation\DisableFrontend\Model\Config\Source\Custom</source_model>
+                </field>
+                <field id="redirect_to" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Redirect to</label>
                 </field>
             </group>
         </section>

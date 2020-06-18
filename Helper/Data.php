@@ -1,6 +1,6 @@
 <?php
 
-namespace Abelbm\DisableFrontend\Helper;
+namespace FocusriteNovation\DisableFrontend\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
@@ -15,7 +15,7 @@ class Data extends AbstractHelper{
      */
     public function getConfigValue() {
         return $this->scopeConfig->getValue(
-            'admin/disable_frontend/show_as_frontend', ScopeInterface::SCOPE_WEBSITE
+            'admin/disable_frontend/show_frontend_as', ScopeInterface::SCOPE_WEBSITE
         );
     }
 }

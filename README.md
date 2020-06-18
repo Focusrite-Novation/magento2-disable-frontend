@@ -1,31 +1,34 @@
-## Disable Frontend in Magento 2
+# Disable Frontend in Magento 2
 Disable the frontend in Magento 2 for using only the Admin and the API routes.
 
-#### 1 - Installation Disable Frontend
+This was forked from [abelbm/magento2-disable-frontend](https://github.com/abelbm/magento2-disable-frontend)
 
-##### Manual Installation
+## 1. Install Disable Frontend
+
+### Manual Installation
 
 Install Disable Frontend for Magento2
  * Download the extension
  * Unzip the file
- * Create a folder {Magento root}/app/code/Abelbm/DisableFrontend
+ * Create a folder {Magento root}/app/code/FocusriteNovation/DisableFrontend
  * Copy the content from the unzip folder
 
+### Using Composer
 
-##### Using Composer
-
+```bash
+$ composer require focusrite-novation/magento2-disablefrontend
 ```
-composer require abelbm/magento2-disablefrontend
+
+## 2. Enable Disable Frontend
+
+```bash
+$ php bin/magento module:enable FocusriteNovation_DisableFrontend
+$ php bin/magento setup:upgrade
+$ php bin/magento cache:flush
+$ php bin/magento setup:di:compile
 ```
-
-#### 2 - Enable Disable Frontend
-
- * php bin/magento module:enable Abelbm_DisableFrontend
- * php bin/magento setup:upgrade
- * php bin/magento cache:flush
- * php bin/magento setup:di:compile
  
- #### 3 - Change the frontend redirect
+## 3. Change the frontend redirect
  
- Stores > Configuration > Advanced > Admin > Disable Frontend
+Stores > Configuration > Advanced > Admin > Disable Frontend
  

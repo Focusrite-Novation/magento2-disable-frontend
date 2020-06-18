@@ -1,5 +1,5 @@
 {
-    "name": "abelbm/magento2-disablefrontend",
+    "name": "focusrite-novation/magento2-disablefrontend",
     "description": "Disable Frontend in Magento 2.",
     "keywords": [
         "magento 2",
@@ -22,6 +22,12 @@
             "email": "abelbmartinez@gmail.com",
             "homepage": "http://abelbolanos.blogspot.com/",
             "role": "Developer"
+        },
+        {
+            "name": "Sophie Shanahan-Kluth",
+            "email": "sophie.sk@focusrite.com",
+            "homepage": "https://focusrite.com/",
+            "role": "Lead developer"
         }
     ],
     "autoload": {
@@ -29,7 +35,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Abelbm\\DisableFrontend\\": ""
+            "FocusriteNovation\\DisableFrontend\\": ""
         }
     }
 }

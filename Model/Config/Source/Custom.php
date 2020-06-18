@@ -1,5 +1,5 @@
 <?php
-namespace Abelbm\DisableFrontend\Model\Config\Source;
+namespace FocusriteNovation\DisableFrontend\Model\Config\Source;
 
 
 class Custom implements \Magento\Framework\Option\ArrayInterface{
@@ -14,8 +14,9 @@ class Custom implements \Magento\Framework\Option\ArrayInterface{
     {
 
         return [
-            ['value' => 0, 'label' => __('Blank Page')],
-            ['value' => 1, 'label' => __('Admin')],
+            ['value' => 0, 'label' => __('Blank page')],
+            ['value' => 1, 'label' => __('Admin login')],
+            ['value' => 2, 'label' => __('Specific URL')],
         ];
     }
 }

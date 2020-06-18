@@ -2,6 +2,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Abelbm_DisableFrontend',
+    'FocusriteNovation_DisableFrontend',
     __DIR__
 );

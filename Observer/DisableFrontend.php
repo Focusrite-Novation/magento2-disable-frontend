@@ -1,18 +1,35 @@
 <?php
-namespace Abelbm\DisableFrontend\Observer;
+
+namespace FocusriteNovation\DisableFrontend\Observer;
+
+use FocusriteNovation\DisableFrontend\Helper\Data as DisableFrontendHelper;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\App\ActionFlag;
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Backend\Helper\Data;
-use Abelbm\DisableFrontend\Helper\Data as DisableFrontendHelper;
 
-class DisableFrontend implements ObserverInterface{
+class DisableFrontend implements ObserverInterface {
 
-    protected   $_actionFlag;
-    protected   $redirect;
-    private     $helperBackend;
-    private     $logger;
-    private     $disableFrontendHelper;
+    /**
+     * @var Magento\Framework\App\ActionFlag;
+     */
+    protected $_actionFlag;
+    
+    /**
+     * @var Magento\Framework\App\Response\RedirectInterface
+     */
+    protected $redirect;
+    
+    /**
+     * @var Magento\Backend\Helper\Data
+     */
+    private $helperBackend;
+    
+    /**
+     * @var FocusriteNovation\DisableFrontend\Helper\Data
+     */
+    private $disableFrontendHelper;
 
     /**
      * DisableFrontend constructor.
@@ -22,19 +39,16 @@ class DisableFrontend implements ObserverInterface{
      * @param RedirectInterface $redirect
      * @param Data $helperBackend
      * @param DisableFrontendHelper $disableFrontendHelper
-     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         ActionFlag $actionFlag,
         RedirectInterface $redirect,
         Data $helperBackend,
         DisableFrontendHelper $disableFrontendHelper,
-        \Psr\Log\LoggerInterface $logger
     ) {
         $this->_actionFlag = $actionFlag;
         $this->redirect = $redirect;
         $this->helperBackend = $helperBackend;
-        $this->logger = $logger;
         $this->disableFrontendHelper = $disableFrontendHelper;
     }
     
@@ -44,16 +58,15 @@ class DisableFrontend implements ObserverInterface{
      * Stores > Configuration > Advanced > Admin > Disable Frontend
      *
      * @author Abel Bolanos Martinez <abelbmartinez@gmail.com>
-     * @param \Magento\Framework\Event\Observer $observer
+     * @param \Magento\Framework\Event\ObserverInterface $observer
      * @return void
      */
-    public function execute(\Magento\Framework\Event\Observer $observer){
-
-        //$this->logger->info('TEST');
+    public function execute(ObserverInterface $observer)
+    {        
+        $this->_actionFlag->set('', Action::FLAG_NO_DISPATCH, true);
         
-        $this->_actionFlag->set('', \Magento\Framework\App\Action\Action::FLAG_NO_DISPATCH, true);
-        
-        if($this->disableFrontendHelper->getConfigValue()){//redirect to Admin
+        if ($this->disableFrontendHelper->getConfigValue() === 1) {
+            // Redirect to admin.
             $controller = $observer->getControllerAction();
             $this->redirect->redirect($controller->getResponse(),$this->helperBackend->getHomePageUrl());
         }
