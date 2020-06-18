@@ -1,8 +1,10 @@
 <?php
+
 namespace FocusriteNovation\DisableFrontend\Model\Config\Source;
 
+use Magento\Framework\Option\ArrayInterface;
 
-class Custom implements \Magento\Framework\Option\ArrayInterface{
+class Custom implements ArrayInterface {
 
     /**
      * Options for the admin config
@@ -12,11 +14,11 @@ class Custom implements \Magento\Framework\Option\ArrayInterface{
      */
     public function toOptionArray()
     {
-
         return [
-            ['value' => 0, 'label' => __('Blank page')],
-            ['value' => 1, 'label' => __('Admin login')],
-            ['value' => 2, 'label' => __('Specific URL')],
+            ['value' => 'blank_page', 'label' => __('Blank page')],
+            ['value' => 'admin_login', 'label' => __('Admin login')],
+            ['value' => 'specific_url', 'label' => __('Specific URL')],
         ];
     }
+
 }

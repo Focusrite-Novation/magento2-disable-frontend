@@ -15,17 +15,17 @@ class DisableFrontend implements ObserverInterface {
      * @var Magento\Framework\App\ActionFlag;
      */
     protected $_actionFlag;
-    
+
     /**
      * @var Magento\Framework\App\Response\RedirectInterface
      */
     protected $redirect;
-    
+
     /**
      * @var Magento\Backend\Helper\Data
      */
     private $helperBackend;
-    
+
     /**
      * @var FocusriteNovation\DisableFrontend\Helper\Data
      */
@@ -51,24 +51,32 @@ class DisableFrontend implements ObserverInterface {
         $this->helperBackend = $helperBackend;
         $this->disableFrontendHelper = $disableFrontendHelper;
     }
-    
+
     /**
-     * Show an empty page(default) or redirect to Admin site.
-     * Depend in the config in
-     * Stores > Configuration > Advanced > Admin > Disable Frontend
+     * Show an empty page (default) or redirect to a given page.
+     *
+     * Config is set in Stores > Configuration > Advanced > Admin > Disable
+     * Frontend.
      *
      * @author Abel Bolanos Martinez <abelbmartinez@gmail.com>
      * @param \Magento\Framework\Event\ObserverInterface $observer
      * @return void
      */
     public function execute(ObserverInterface $observer)
-    {        
+    {
+        // Shows a blank page if all else fails.
         $this->_actionFlag->set('', Action::FLAG_NO_DISPATCH, true);
-        
-        if ($this->disableFrontendHelper->getConfigValue() === 1) {
+
+        $configValue = $this->disableFrontendHelper->getConfigValue();
+
+        if ($configValue['show_frontend_as'] === 'admin_login') {
             // Redirect to admin.
             $controller = $observer->getControllerAction();
-            $this->redirect->redirect($controller->getResponse(),$this->helperBackend->getHomePageUrl());
+            $this->redirect->redirect($controller->getResponse(), $this->helperBackend->getHomePageUrl());
+        }
+        elseif ($configValue['show_frontend_as'] === 'redirect_to') {
+            // Check that the URL is valid.
+            // Redirect to that URL.
         }
     }
 }
