@@ -75,7 +75,7 @@ class DisableFrontend implements ObserverInterface {
             $controller = $observer->getControllerAction();
             $this->redirect->redirect($controller->getResponse(), $this->helperBackend->getHomePageUrl());
         }
-        elseif ($configValue['show_frontend_as'] === 'redirect_to') {
+        elseif ($configValue['show_frontend_as'] === 'specific_url') {
             if (empty($configValue['redirect_to'])) {
                 // If there is no redirect destination, then throw an exception.
                 throw new \LogicException('No redirect destination was found.');
