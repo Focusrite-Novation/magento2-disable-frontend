@@ -65,15 +65,18 @@ class DisableFrontend implements ObserverInterface {
      */
     public function execute(Observer $observer)
     {
-        $controller = $observer->getControllerAction();
-        $destination = $controller->getResponse();
         $configValues = $this->disableFrontendHelper->getConfigValue();
 
-        // Allow requests to the cart to get through.
-        $request = $observer->getRequest();
-        if ($request->getRouteName() === 'cart') {
-            return;
+        if ($configValues['allow_checkout']) {
+            // Allow requests to the cart and checkout to get through.
+            $request = $observer->getRequest();
+            if ($request->getRouteName() == 'cart' || $request->getRouteName() == 'checkout') {
+                return;
+            }
         }
+
+        $controller = $observer->getControllerAction();
+        $destination = $controller->getResponse();
 
         // Shows a blank page if all else fails.
         $this->_actionFlag->set('', Action::FLAG_NO_DISPATCH, true);

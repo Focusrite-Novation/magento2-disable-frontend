@@ -18,6 +18,7 @@ class Data extends AbstractHelper {
         return [
             'show_frontend_as' => $this->scopeConfig->getValue('admin/disable_frontend/show_frontend_as', ScopeInterface::SCOPE_WEBSITE),
             'redirect_to' => $this->scopeConfig->getValue('admin/disable_frontend/redirect_to', ScopeInterface::SCOPE_WEBSITE),
+            'allow_checkout' => $this->scopeConfig->getValue('admin/disable_frontend/allow_checkout', ScopeInterface::SCOPE_WEBSITE),
         ];
     }
 

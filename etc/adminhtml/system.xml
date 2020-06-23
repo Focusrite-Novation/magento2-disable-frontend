@@ -12,6 +12,9 @@
                     <label>Redirect to</label>
                     <validate>validate-url</validate>
                 </field>
+                <field id="allow_checkout" translate="label" type="checkbox" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow checkout routes</label>
+                </field>
             </group>
         </section>
     </system>
