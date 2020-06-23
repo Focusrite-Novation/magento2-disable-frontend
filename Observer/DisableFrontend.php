@@ -65,25 +65,31 @@ class DisableFrontend implements ObserverInterface {
      */
     public function execute(Observer $observer)
     {
+        $controller = $observer->getControllerAction();
+        $destination = $controller->getResponse();
+        $configValues = $this->disableFrontendHelper->getConfigValue();
+
+        // Allow requests to the cart to get through.
+        $request = $observer->getRequest();
+        if ($request->getRouteName() === 'cart') {
+            return;
+        }
+
         // Shows a blank page if all else fails.
         $this->_actionFlag->set('', Action::FLAG_NO_DISPATCH, true);
 
-        $configValue = $this->disableFrontendHelper->getConfigValue();
-
-        if ($configValue['show_frontend_as'] === 'admin_login') {
+        if ($configValues['show_frontend_as'] === 'admin_login') {
             // Redirect to admin.
-            $controller = $observer->getControllerAction();
-            $this->redirect->redirect($controller->getResponse(), $this->helperBackend->getHomePageUrl());
+            $this->redirect->redirect($destination, $this->helperBackend->getHomePageUrl());
         }
-        elseif ($configValue['show_frontend_as'] === 'specific_url') {
-            if (empty($configValue['redirect_to'])) {
+        elseif ($configValues['show_frontend_as'] === 'specific_url') {
+            if (empty($configValues['redirect_to'])) {
                 // If there is no redirect destination, then throw an exception.
                 throw new \LogicException('No redirect destination was found.');
             }
 
             // The URL is valid. If it isn't, then the config form can't save.
-            $controller = $observer->getControllerAction();
-            $this->redirect->redirect($controller->getResponse(), $configValue['redirect_to']);
+            $this->redirect->redirect($destination, $configValues['redirect_to']);
         }
     }
 }
