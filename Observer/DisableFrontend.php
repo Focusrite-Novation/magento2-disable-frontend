@@ -70,7 +70,13 @@ class DisableFrontend implements ObserverInterface {
         if ($configValues['allow_checkout']) {
             // Allow requests to the cart and checkout to get through.
             $request = $observer->getRequest();
-            if ($request->getRouteName() == 'cart' || $request->getRouteName() == 'checkout') {
+            $allowed_paths = [
+                'cart',
+                'checkout',
+                'paypal',
+                'adyen',
+            ];
+            if (in_array($request->getRouteName(), $allowed_paths)) {
                 return;
             }
         }
